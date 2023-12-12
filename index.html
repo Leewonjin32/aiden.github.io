@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>서울 지도</title>
+  <!-- Leaflet CSS 파일 -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <!-- Leaflet JS 파일 -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // 서울의 좌표
+    var seoulCoordinates = [37.5665, 126.9780];
+
+    // Leaflet을 사용하여 지도 초기화, 서울을 중심으로 5km 축적
+    var map = L.map('map').setView(seoulCoordinates, 13);
+
+    // OpenStreetMap 타일 레이어 추가
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    // 예시 GeoJSON 데이터 (서울 시청 좌표 사용)
+    var geojsonFeature = {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [126.9780, 37.5665]
+      },
+      "properties": {
+        "name": "서울 시청",
+        "description": "서울의 중심"
+      }
+    };
+
+    // GeoJSON 데이터를 Leaflet 마커로 추가
+    L.geoJSON(geojsonFeature).addTo(map);
+  </script>
+</body>
+</html>
